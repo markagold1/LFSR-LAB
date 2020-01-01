@@ -1,0 +1,124 @@
+lfsr_msrg():
+MSRG taps: 25
+MSRG initial fill: 1
+MSRG final fill: 13
+MSRG seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_msrg2ssrg():
+MSRG taps: 25
+MSRG initial fill: 1
+SSRG taps: 19
+SSRG initial fill: 9
+SSRG seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_ssrg():
+SSRG taps: 19
+SSRG initial fill: 9
+SSRG final fill: 5
+SSRG seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_ssrg2msrg():
+SSRG taps: 19
+SSRG initial fill: 9
+MSRG taps: 25
+MSRG initial fill: 1
+MSRG seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_ssgm():
+SSGM taps: 25
+SSGM initial fill: 1
+SSGM final fill: 13
+SSGM seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_ssgs():
+SSGS taps: 19
+SSGS initial fill: 9
+SSGS final fill: 5
+SSGS seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_shift2mask():
+SSRG taps: 19
+SSRG shift: 8
+SSRG initial fill: 1 (assumed)
+SSRG mask: 11
+
+lfsr_ssrg_mask():
+Masked SSRG taps: 19
+Masked SSRG initial fill: 1
+Masked SSRG final fill: 9
+Masked SSRG mask: 11
+Masked SSRG seq (delayed by 8 relative to unmasked):
+ 1 1 0 1 0 1 1 1 1 0 0 0 1 0 0
+ 1 1 0 1 0 1 1 1 1 0 0 0 1 0 0
+ 1 1 0 1
+lfsr_ssrg(): (unmasked)
+Unasked SSRG taps: 19
+Unasked SSRG initial fill: 1
+Unasked SSRG final fill: 9
+Unnasked SSRG seq:
+ 1 0 0 0 1 0 0 1 1 0 1 0 1 1 1
+ 1 0 0 0 1 0 0 1 1 0 1 0 1 1 1
+ 1 0 0 0
+
+lfsr_jump2mask():
+SSRG taps: 19
+SSRG shift: 8
+SSRG initial fill: 1 (assumed)
+SSRG mask: 11
+
+lfsr_msrg_mask():
+Masked MSRG taps: 25
+Masked MSRG initial fill: 1
+Masked MSRG final fill: 13
+Masked MSRG mask: 11
+Masked MSRG seq (delayed by 6 relative to unmasked):
+ 1 1 1 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 1 1 0 0 0 1 0 0 1 1 0 1 0 1
+ 1 1 1 0
+lfsr_msrg(): (unmasked)
+Unasked MSRG taps: 25
+Unasked MSRG initial fill: 1
+Unasked MSRG final fill: 13
+Unnasked MSRG seq:
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1 1 0 1 0 1 1 1 1 0 0 0
+ 1 0 0 1
+
+lfsr_ssgs_jump():
+SSRG jump: 8064
+SSRG taps: 262273
+Fill for jump: 13937
+
+get_t():
+Ts: 
+[0, 0, 0, 0, 1;
+ 1, 0, 0, 0, 0;
+ 0, 1, 0, 0, 1;
+ 0, 0, 1, 0, 0;
+ 0, 0, 0, 1, 0]
+
+Ts: 
+[0, 0, 1, 0, 1;
+ 1, 0, 0, 0, 0;
+ 0, 1, 0, 0, 0;
+ 0, 0, 1, 0, 0;
+ 0, 0, 0, 1, 0]
+
