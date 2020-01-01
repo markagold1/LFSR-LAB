@@ -1,4 +1,4 @@
-﻿Explore Fibonacci, Galois, and State Space LFSR sequence generators.
+﻿Explore Fibonacci, Galois, and State Space Linear Feedback Shift Register sequence generators.
 
 # What is it?
 LFSR-Lab is a collection of utilities for generating, manipulating, and analyzing Linear Feedback Shift Register sequences.
