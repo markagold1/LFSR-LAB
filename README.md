@@ -1,11 +1,11 @@
-﻿Explore Galois, Fibonacci, and State Space LFSR sequence generators.
+﻿Explore Fibonacci, Galois, and State Space LFSR sequence generators.
 
 # What is it?
 LFSR-Lab is a collection of utilities for generating, manipulating, and analyzing LFSR sequences.
 
 In this repository you'll find:
 * Python, MATLAB, and C++ implementations of all utilities
-* Customizable sequence generators for Galois (aka SSRG), Fibonacci (aka MSRG), and State Space (aka SSG) LFSR formulations
+* Customizable sequence generators for Fibonacci (aka SSRG), Galois (aka MSRG), and State Space (aka SSG) LFSR formulations
 * Utilities to convert between equivalent SSRG and MSRG structures
 * Utilities to calculate and apply masks to shift the starting position of the pseudorandom sequence 
 * Utilities to perform fast propagation of LFSR state
