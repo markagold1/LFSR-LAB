@@ -1,7 +1,7 @@
 ﻿Explore Fibonacci, Galois, and State Space LFSR sequence generators.
 
 # What is it?
-LFSR-Lab is a collection of utilities for generating, manipulating, and analyzing LFSR sequences.
+LFSR-Lab is a collection of utilities for generating, manipulating, and analyzing Linear Feedback Shift Register sequences.
 
 In this repository you'll find:
 * Python, MATLAB, and C++ implementations of all utilities
