@@ -98,27 +98,36 @@
  *
  * SSG models are useful for fast propagation of LFSR state.
  *
- *  T   : Characteristic matrix
+ *  T   : Characteristic matrix, N-by-N, where N is the degree
+ *        of the generator (tap) polynomial
+ *
  *  v   : Shift register state (fill) at time step n
  *   n
  *
+ *
  *    Tv    = v
  *      n      n+1
+ *
  *
  *     m
  *    T v   = v
  *       n     n+m
  *
+ *
  *  where m>0 propagates forward and m<0 propagates backward.
  *
- *  For SSRG, T is denoted Ts and is defined using matlab form as:
+ *  For SSRG, T is denoted Ts and is defined in matlab notation as:
  *
- *            Ts = [ [     c(n:-1:1)       ]
- *                   [eye(n-1) zeros(n-1,1)] ]
+ *            Ts = [ [     c(N:-1:1)       ]
+ *                   [eye(N-1) zeros(N-1,1)] ]
  *
- *  For MSRG, T is denoted Tm and is defined using matlab form as:
+ *  where c is a binary row vector of feeback tap coefficients,
+ *  eye is an identity matrix, and zeros is an all zeros vector.
  *
- *            Tm = [ [zeros(1,n-1); eye(n-1)] c(7:-1:1).']
+ *
+ *  For MSRG, T is denoted Tm and is defined in matlab notation as:
+ *
+ *            Tm = [ [zeros(1,N-1); eye(N-1)] c(N:-1:1).']
  *
  *  The T matrix formulations above are slightly different from, 
  *  but equivalent to [1] in order to accomodate efficient use of
