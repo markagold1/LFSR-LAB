@@ -1,4 +1,4 @@
-// ConsoleApplication4.cpp : Defines the entry point for the console application.
+/* Harness for testing functions in lfsr.h */
 
 #include <iostream>
 #include <string>

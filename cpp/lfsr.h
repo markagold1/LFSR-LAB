@@ -24,10 +24,10 @@
  *          of powers in z with non-zero coefficients.
  *          For example poly = [5,3,0] represents
  *          generator polynomial: g(z) = z^5 + z^3 + 1
- *          Poly is a carry-over from matlab and python
+ *          Poly is a carry-over from the matlab and python
  *          models. In the c/c++ implementation tap
- *          polynomials are represened exclusively by
- *          left-msb integers.
+ *          polynomials are represented exclusively by
+ *          left-msb integers (see taps definition).
  *   taps - An unsigned 64-bit integer whose bits
  *          represent the coefficients of the generator
  *          polynomial.  For example a tap value of 41
@@ -101,17 +101,17 @@
  *  T   : Characteristic matrix, N-by-N, where N is the degree
  *        of the generator (tap) polynomial
  *
- *  v   : Shift register state (fill) at time step n
+ *  v   : Shift register state (fill) at time step n, an N-by-1 vector
  *   n
  *
  *
- *    Tv    = v
- *      n      n+1
+ *    v    = Tv
+ *     n+1     n
  *
  *
- *     m
- *    T v   = v
- *       n     n+m
+ *            m
+ *   v     = T v
+ *    n+m       n
  *
  *
  *  where m>0 propagates forward and m<0 propagates backward.
@@ -641,9 +641,9 @@ public:
   }
   // Convert between LFSR types:
   // If the current LFSR object is SSRG then return
-  // the equivalend MSRG polynomial and fill value
+  // the equivalent MSRG polynomial and fill
   // If the current LFSR object is MSRG then return
-  // the equivalend SSRG polynomial and fill value
+  // the equivalent SSRG polynomial and fill
   // Note: This method does not change the state of
   // the current LFSR object but merely computes
   // the polynomial and fill for its dual
@@ -664,8 +664,12 @@ public:
     }
     return get_info(infotype, taps, newfill);
   }
-  // Advance or delay the fill state by an amount
+  // Propagate the LFSR state by an amount
   // corresponding to "num" states
+  // num>0 forward propagates the state relative to
+  // num = 0 thereby advancing the output sequence
+  // num<0 propagates backwards thereby delaying
+  // the output sequence
   // Note: This method changes the state of the
   // LFSR object by updating its fill value
   uint64_t jump(int num)
@@ -683,6 +687,9 @@ public:
   }
   // Calculate the LFSR mask corresponding to an
   // advance or delay of "num" states
+  // num>0 produces a mask that delays the output 
+  // sequence num bits relative to num=0
+  // num<0 produces a mask that advances it
   // Note: This method does not change the
   // state of the LFSR object but merely computes
   // the mask value to use with a masked LFSR
