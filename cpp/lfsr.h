@@ -684,6 +684,7 @@ public:
     }
     // update state per requested jump
     fill_ = newfill;
+    return newfill;
   }
   // Calculate the LFSR mask corresponding to an
   // advance or delay of "num" states
