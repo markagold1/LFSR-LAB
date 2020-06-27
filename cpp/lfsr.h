@@ -295,7 +295,7 @@ Matrix msrg_char_mtx(uint64_t taps, int degree)
 // taps is a left-msb integer
 Matrix ssrg_char_mtx(uint64_t taps, int degree)
 {
-  uint64_t p = taps & ((1 << degree) - 1);
+  uint64_t p = taps & ((1ull << degree) - 1);
   Matrix Vp = Transpose(uint2vec(p, degree));
   Matrix IO = Hcat(Eye(degree - 1), Zeros(degree - 1, 1));
   Matrix T = ToGF2(Vcat(Vp, IO));
@@ -342,12 +342,12 @@ std::vector<int> lfsr_ssrg(int num, uint64_t taps, uint64_t & fill, int outtype 
 {
   int degree = int(std::log2(taps));
   uint64_t sr = fill;
-  taps &= ((1 << degree) - 1);
+  taps &= ((1ull << degree) - 1);
   std::vector<int> seq;
   for (int nn = 0; nn < num; ++nn) {
     seq.push_back(output(sr & 1, outtype));
     int parbit = parity(sr & taps , degree);
-    sr = (parbit << (degree - 1)) | (sr >> 1);
+    sr = ((uint64_t) parbit << (degree - 1)) | (sr >> 1);
   }
   fill = sr;
   return seq;
@@ -358,15 +358,15 @@ std::vector<int> lfsr_msrg(int num, uint64_t taps, uint64_t & fill, int outtype 
 {
   int degree = int(std::log2(taps));
   uint64_t sr = fill;
-  taps &= ((1 << degree) - 1);
+  taps &= ((1ull << degree) - 1);
   std::vector<int> seq;
   for (int nn = 0; nn < num; ++nn) {
     seq.push_back(output(sr & 1, outtype));
     if (sr & 1) {
-      sr = long(1 << (degree - 1)) | ((sr >> 1) ^ (taps >> 1));
+      sr = long(1ull << (degree - 1)) | ((sr >> 1) ^ (taps >> 1));
     }
     else {
-      sr = (0 << (degree - 1)) | (sr >> 1);
+      sr = (0ull << (degree - 1)) | (sr >> 1);
     }
   }
   fill = sr;
@@ -378,15 +378,15 @@ std::vector<int> lfsr_msrg_mask(int num, uint64_t taps, uint64_t & fill, uint64_
 {
   int degree = int(std::log2(taps));
   uint64_t sr = fill;
-  taps &= ((1 << degree) - 1);
+  taps &= ((1ull << degree) - 1);
   std::vector<int> seq;
   for (int nn = 0; nn < num; ++nn) {
     seq.push_back(output(parity(sr & mask, degree) != 0, outtype));
     if (sr & 1) {
-      sr = long(1 << (degree - 1)) | ((sr >> 1) ^ (taps >> 1));
+      sr = long(1ull << (degree - 1)) | ((sr >> 1) ^ (taps >> 1));
     }
     else {
-      sr = (0 << (degree - 1)) | (sr >> 1);
+      sr = (0ull << (degree - 1)) | (sr >> 1);
     }
   }
   fill = sr;
@@ -398,12 +398,12 @@ std::vector<int> lfsr_ssrg_mask(int num, uint64_t taps, uint64_t & fill, uint64_
 {
   int degree = int(std::log2(taps));
   uint64_t sr = fill;
-  taps &= ((1 << degree) - 1);
+  taps &= ((1ull << degree) - 1);
   std::vector<int> seq;
   for (int nn = 0; nn < num; ++nn) {
     seq.push_back(output(parity(sr & mask, degree) != 0, outtype));
     int parbit = parity(sr & taps, degree);
-    sr = (parbit << (degree - 1)) | (sr >> 1);
+    sr = ((uint64_t) parbit << (degree - 1)) | (sr >> 1);
   }
   fill = sr;
   return seq;
@@ -495,15 +495,15 @@ uint64_t lfsr_ssrg2msrg(uint64_t staps, uint64_t sfill, uint64_t & mfill)
   // form msrg characteristic matrix Tm
   Matrix Tm = msrg_char_mtx(mtaps, degree);
   // mtaps_nolsb because nn loop uses all but the lsb of mtaps
-  uint64_t mtaps_nolsb = (mtaps & ((1 << degree) - 1)) >> 1;
+  uint64_t mtaps_nolsb = (mtaps & ((1ull << degree) - 1)) >> 1;
   uint64_t msr = 0;
   // inject ssrg shift reg contents into msrg feedback path
   for (int nn = 0; nn < degree; ++nn) {
     if (ssr & 1) {
-      msr = long(1 << (degree - 1)) | ((msr >> 1) ^ mtaps_nolsb);
+      msr = long(1ull << (degree - 1)) | ((msr >> 1) ^ mtaps_nolsb);
     }
     else {
-      msr = (0 << (degree - 1)) | (msr >> 1);
+      msr = (0ull << (degree - 1)) | (msr >> 1);
     }
     ssr >>= 1;
   }
@@ -590,7 +590,7 @@ uint64_t lfsr_jump2mask(int jump, uint64_t taps)
 uint64_t lfsr_msrg_jump2mask(int jump, uint64_t taps)
 {
   int degree = int(std::log2(taps));
-  uint64_t ifill = 1 << (degree - 1);
+  uint64_t ifill = 1ull << (degree - 1);
   uint64_t fill = lfsr_ssgm_jump(-jump, taps, ifill);
   std::vector<int> seq = lfsr_msrg(degree, taps, fill);
   uint64_t mask = bi2de(seq, "left-msb");
@@ -768,17 +768,17 @@ public:
   {
     lfsr_info info = get_info();
     printf("LFSR type:\t\t%s\n", info.type.c_str());
-    printf("LFSR taps:\t\t0x%x\n", info.taps);
-    printf("LFSR fill:\t\t0x%x\n", info.fill);
-    printf("LFSR mask:\t\t0x%x\n", info.mask);
+    printf("LFSR taps:\t\t0x%llx\n", info.taps);
+    printf("LFSR fill:\t\t0x%llx\n", info.fill);
+    printf("LFSR mask:\t\t0x%llx\n", info.mask);
     printf("LFSR output type:\t%d\n", info.outtype);
   }
   void PrintInfo(lfsr_info info) const
   {
     printf("LFSR type:\t\t%s\n", info.type.c_str());
-    printf("LFSR taps:\t\t0x%x\n", info.taps);
-    printf("LFSR fill:\t\t0x%x\n", info.fill);
-    printf("LFSR mask:\t\t0x%x\n", info.mask);
+    printf("LFSR taps:\t\t0x%llx\n", info.taps);
+    printf("LFSR fill:\t\t0x%llx\n", info.fill);
+    printf("LFSR mask:\t\t0x%llx\n", info.mask);
     printf("LFSR output type:\t%d\n", info.outtype);
   }
 

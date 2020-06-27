@@ -12,7 +12,8 @@ if 1
 %mask = lfsr_jump2mask(desired_jump,poly);
 %mask = 3197494096723161336
 %mask = 2c5f c7f0 9e97 b0f8
-poly = [64,63,61,60,0];  % order 64
+poly = [64,63,61,60,0];  % order 64 (matlab breaks when order > 63)
+poly = [42,40,37,35,0];  % order 42
 jump = 990005;
 [seq,fill]=lfsr_ssrg(2^15,poly,1);
 mask = lfsr_jump2mask(jump,poly);
