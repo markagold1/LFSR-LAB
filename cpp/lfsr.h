@@ -768,17 +768,17 @@ public:
   {
     lfsr_info info = get_info();
     printf("LFSR type:\t\t%s\n", info.type.c_str());
-    printf("LFSR taps:\t\t0x%llx\n", info.taps);
-    printf("LFSR fill:\t\t0x%llx\n", info.fill);
-    printf("LFSR mask:\t\t0x%llx\n", info.mask);
+    printf("LFSR taps:\t\t0x%lx\n", info.taps);
+    printf("LFSR fill:\t\t0x%lx\n", info.fill);
+    printf("LFSR mask:\t\t0x%lx\n", info.mask);
     printf("LFSR output type:\t%d\n", info.outtype);
   }
   void PrintInfo(lfsr_info info) const
   {
     printf("LFSR type:\t\t%s\n", info.type.c_str());
-    printf("LFSR taps:\t\t0x%llx\n", info.taps);
-    printf("LFSR fill:\t\t0x%llx\n", info.fill);
-    printf("LFSR mask:\t\t0x%llx\n", info.mask);
+    printf("LFSR taps:\t\t0x%lx\n", info.taps);
+    printf("LFSR fill:\t\t0x%lx\n", info.fill);
+    printf("LFSR mask:\t\t0x%lx\n", info.mask);
     printf("LFSR output type:\t%d\n", info.outtype);
   }
 
