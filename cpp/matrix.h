@@ -56,6 +56,7 @@ Usage:
 #include <cstdlib>
 #include <cstdio>
 #include <math.h>
+#include <algorithm>  //swap
 
 #define PAUSE {printf("Press \"Enter\" to continue\n"); fflush(stdin); getchar(); fflush(stdin);}
 
@@ -133,7 +134,7 @@ public:
     }
   }
 
-  // assignment operator
+  // copy constructor
   Matrix(const Matrix& a)
   {
     rows = a.rows;
@@ -178,25 +179,6 @@ public:
     {
       throw Exception("Subscript out of range");
     }
-  }
-
-  // assignment operator
-  Matrix& operator= (const Matrix& a)
-  {
-    rows = a.rows;
-    cols = a.cols;
-    p = new double*[a.rows];
-    for (int r = 0; r < a.rows; r++)
-    {
-      p[r] = new double[a.cols];
-
-      // copy the values from the matrix a
-      for (int c = 0; c < a.cols; c++)
-      {
-        p[r][c] = a.p[r][c];
-      }
-    }
-    return *this;
   }
 
   // add a double value (elements wise)
@@ -481,6 +463,20 @@ public:
     return cols;
   }
 
+  void swap(Matrix& a)
+  {
+    std::swap(rows, a.rows);
+    std::swap(cols, a.cols);
+    std::swap(p, a.p);
+  }
+
+  // assignment operator
+  Matrix& operator= (Matrix a)
+  {
+    this->swap(a);
+    return *this;
+  }
+
   // print the contents of the matrix
   void Print() const
   {
@@ -528,15 +524,15 @@ public:
         }
         for (int c = 0; c < cols-1; c++)
         {
-          printf("%d, ", int(p[r][c]));
+          printf("%2d, ", int(p[r][c]));
         }
         if (r < rows-1)
         {
-          printf("%d;\n", int(p[r][cols-1]));
+          printf("%2d;\n", int(p[r][cols-1]));
         }
         else
         {
-          printf("%d]\n", int(p[r][cols-1]));
+          printf("%2d]\n", int(p[r][cols-1]));
         }
       }
     }
