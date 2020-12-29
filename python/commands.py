@@ -26,24 +26,25 @@ smat2 = smat
 u0 = bd.bi2de(smat2)
 (u,n) = bm.boxmuller(u0)
 
+figure(1)
 rr = np.arange(-10.0,10.0,0.05)
 hist,bins = np.histogram(n,rr)
 delta = bins[1] - bins[0]
 area = np.sum(hist) * delta
 bar(bins[:-1]-delta/2,hist/area,align='edge',width=delta)
-hold
 y = normpdf.normpdf(rr,0,1)
 plot(rr,y,'r')
 ax = axis([-6, 6, 0, 0.42])
 show()
 
 # uniform deviates
+figure(2)
 rru = np.arange(0.0,1.0,0.005)
 histu,binsu = np.histogram(u,rru)
 delta_u = binsu[1] -binsu[0]
 area_u = np.sum(histu) * delta_u
 bar(binsu[:-1]-delta_u/2,histu/area_u,align='edge',width=delta_u)
-axu = axis([0, 1 0 1.2])
+axu = axis([0, 1, 0, 1.2])
 
 
 # test ssrgmask2ssrg

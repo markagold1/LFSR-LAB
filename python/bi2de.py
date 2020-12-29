@@ -4,7 +4,7 @@ import numpy as np
 def bi2de(bin,flag = 'left-msb'):
     if bin.ndim == 2:
         d = np.empty(bin.shape[1])
-        for i in xrange(0, bin.shape[1]):
+        for i in range(0, bin.shape[1]):
             d[i] = bi2de1(bin[:,i],flag)
     else:
         d = bi2de1(bin,flag)

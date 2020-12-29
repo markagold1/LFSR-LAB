@@ -121,7 +121,7 @@ def ssrg_mask(num=16,poly=[4,3,0],ifill=8,mask=15):
     sr = de2bi(ifill,degree,'left-msb')
     ma = de2bi( mask,degree,'left-msb')
 
-    for nn in xrange(num):
+    for nn in range(num):
         seq[nn] = (sr & ma).sum() % np.uint64(2)
         parity = (taps[1:] & sr).sum() % np.uint64(2)
         sr = np.hstack((np.uint64(parity),sr[0:-1]))
@@ -188,7 +188,7 @@ def ssgm(num,poly,ifill):
     Tm = np.vstack((np.eye(degree-1,dtype=np.uint64),np.zeros((1,degree-1),dtype=np.uint64)))
     Tm = np.flipud(np.fliplr(np.hstack((pm,Tm))))
 
-    for nn in xrange(num):
+    for nn in range(num):
         seq[nn] = sr[-1]
         sr = mvMultGF2(Tm,sr)
 
@@ -209,7 +209,7 @@ def ssgs(num,poly,ifill):
     Ts = np.hstack((np.zeros((degree-1,1),dtype=np.uint64),np.eye(degree-1,dtype=np.uint64)))
     Ts = np.flipud(np.fliplr(np.vstack((Ts,ps))))
 
-    for nn in xrange(num):
+    for nn in range(num):
         seq[nn] = sr[-1]
         sr = mvMultGF2(Ts,sr)
 

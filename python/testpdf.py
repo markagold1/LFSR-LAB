@@ -35,7 +35,6 @@ def process(poly = [64,63,61,60,0], Q = 10, jump = 1e10, verbose=1):
         delta = bins[1] - bins[0]
         area = np.sum(hist) * delta
         bar(bins[:-1]-delta/2,hist/area,align='edge',width=delta)
-        hold
         y = normpdf.normpdf(rr,0,1)
         plot(rr,y,'r')
         ax = axis([-6, 6, 0, 0.42])
@@ -51,7 +50,7 @@ def process(poly = [64,63,61,60,0], Q = 10, jump = 1e10, verbose=1):
 def bi2de(bin,flag = 'left-msb'):
     if bin.ndim == 2:
         d = np.empty(bin.shape[1])
-        for i in xrange(0, bin.shape[1]):
+        for i in range(0, bin.shape[1]):
             d[i] = bi2de1(bin[:,i],flag)
     else:
         d = bi2de1(bin,flag)

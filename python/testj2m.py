@@ -1,5 +1,6 @@
 # Test lfsr.jump2mask()
 
+from __future__ import print_function
 import matplotlib.pyplot as plt
 import numpy as np
 import lfsr as l
@@ -15,9 +16,9 @@ poly = [64,63,61,60,0]
 # Generate the first 32k states from initial fill=1:
 (seq,fill)=l.ssrg(2**15,poly,1)
 if fill == expected_fill:
-  print "FILL = ", fill, "OK"
+  print("FILL = {0} OK".format(fill))
 else:
-  print fill, "FAIL, expected", expected_fill
+  print("FILL = {0} FAIL, expected {1}".format(fill, expected_fill))
 
 # jump by almost 1 million code states
 jump = 990005
@@ -26,9 +27,9 @@ jump = 990005
 # will delay the code sequence by our jump value.
 mask = l.jump2mask(jump,poly)
 if mask == expected_mask:
-  print "MASK = ", mask, "OK"
+  print("MASK = {0} OK".format(mask))
 else:
-  print mask, "FAIL, expected", expected_mask
+  print("MASK = {0} FAIL, expected {1}".format(mask, expected_mask))
 
 # Now generate a length 1M sequence using
 # a masked generator with the same initial
@@ -39,9 +40,9 @@ else:
 # at index=jump=990005.
 (seqj,fillj)=l.ssrg_mask(2**20,poly,1,mask)
 if fillj == expected_fillj:
-  print "FILL after jump = ", fillj, "OK"
+  print("FILL after jump = {0} OK".format(fillj))
 else:
-  print fillj, "FAIL, expected", expected_fillj
+  print("FILL after jump = {0} FAIL, expected {1}".format(fillj, expected_fillj))
 
 # Plot the difference between the original
 # sequence and the delayed sequence evaluated
